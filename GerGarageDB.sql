@@ -13,8 +13,8 @@ VALUES ('Ger', 'gergarage','admin', '0831119999','Admin');
 
 create table booking_service (
 	booking_service_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    type_service VARCHAR(30) NOT NULL,
-    cost DOUBLE(5,2) NOT NULL
+    	booking_service_type VARCHAR(30) NOT NULL,
+    	booking_service_cost DOUBLE(5,2) NOT NULL
 );
 
 INSERT INTO booking_service (type_service, cost)

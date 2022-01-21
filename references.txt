@@ -1,0 +1,2 @@
+spring and enums
+https://www.baeldung.com/spring-enum-request-param

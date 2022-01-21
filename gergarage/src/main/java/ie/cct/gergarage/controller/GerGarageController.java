@@ -1,7 +1,5 @@
 package ie.cct.gergarage.controller;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
 import java.security.Key;
 import java.sql.Connection;
@@ -9,23 +7,28 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Optional;
 
 import javax.crypto.spec.SecretKeySpec;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import ie.cct.gergarage.model.Make;
+import ie.cct.gergarage.model.Model;
 import ie.cct.gergarage.model.NumberType;
 import ie.cct.gergarage.model.Token;
 import ie.cct.gergarage.model.User;
+import ie.cct.gergarage.repository.MakeRepository;
+import ie.cct.gergarage.repository.ModelRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -36,21 +39,58 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class GerGarageController {
 	private String SECRET_KEY = "secret";
 
-	private List<User> users;
-
+	@Autowired
+	private MakeRepository makeRepository;
+	@Autowired
+	private ModelRepository modelRepository;
+	
 	public GerGarageController() {
-		users = new ArrayList<>();
-		try (BufferedReader br = new BufferedReader(new FileReader("users.txt"))) {
-			String line = "";
-			while((line = br.readLine()) != null) {
-				String [] user = line.split(" ");
-				users.add(new User(user[0], user[1]));
-			}
-			br.close();
-		} catch(Exception e) {
-			throw new RuntimeException(e);
-		}
+		
+        
+           
+        /*  
+        Model model1=new Model("Focus", make1);
+        Model model2=new Model("Ka", make1);
+        Model model3=new Model("Uno", make2);
+        Model model4=new Model("Palio", make2);
+        Model model5=new Model("Toro", make2);
+          */
+
+		
 	}
+	
+	@GetMapping(path="/allMake")
+	  public @ResponseBody Iterable<Make> getAllMakes() {
+	    // This returns a JSON or XML with the users
+		Make make1=new Make("Ford");           
+        Make make2=new Make("Fiat");
+        
+        makeRepository.save(make1);
+        makeRepository.save(make2);
+        
+	    return makeRepository.findAll();
+	  }
+	@GetMapping(path="/allModel")
+		  public @ResponseBody Iterable<Make> getAllModels() {
+		    // This returns a JSON or XML with the users
+		  Optional<Make> make1 = makeRepository.findById(1);
+		  Optional<Make> make2 = makeRepository.findById(2);
+	      
+	      Model model1=new Model("Focus", make1.get());
+	      Model model2=new Model("Ka", make1.get());
+	      Model model3=new Model("Uno", make2.get());
+	      Model model4=new Model("Palio", make2.get());
+	      Model model5=new Model("Toro", make2.get());
+	      
+	      modelRepository.save(model1);
+	      modelRepository.save(model2);
+	      modelRepository.save(model3);
+	      modelRepository.save(model4);
+	      modelRepository.save(model5);
+      
+	    return makeRepository.findAll();
+	  }
+	
 
 	@GetMapping("number-odd-even")
 	public NumberType oddEven(@RequestParam("number") Integer number, @RequestHeader("Authorization") String auth) {
@@ -89,7 +129,7 @@ public class GerGarageController {
 	        return claims;
 	}
 	
-	@PostMapping("/login")
+	@PostMapping("/login-test")
 	public Token login(@RequestBody User loggingUser) {
 		
 		try {
@@ -97,14 +137,14 @@ public class GerGarageController {
             		"jdbc:mysql://localhost:3306/gergarage", "root", "password");
 
             PreparedStatement st = (PreparedStatement) connection
-                .prepareStatement("SELECT username, password FROM user WHERE username=? and password=?");
+                .prepareStatement("SELECT user_username, user_password FROM user WHERE user_username=? and user_password=?");
 
-            st.setString(1, loggingUser.getUsername());
-            st.setString(2, loggingUser.getPassword());
+            st.setString(1, loggingUser.getUser_username());
+            st.setString(2, loggingUser.getUser_password());
             
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-            	return createJWT("finalproject", loggingUser.getUsername(), "gergarage");
+            	return createJWT("finalproject", loggingUser.getUser_username(), "gergarage");
             } else {
             	// TODO Needs a concrete exception
         		throw new RuntimeException("User not found");
