@@ -9,6 +9,8 @@ create table user(
 
 INSERT INTO user (user_name, user_username, user_password, user_phone, user_type)
 VALUES ('Ger', 'gergarage','admin', '0831119999','Admin');
+INSERT INTO user (user_name, user_username, user_password, user_phone, user_type)
+VALUES ('Willyan', 'will','password', '0831119999','Customer');
 
 
 create table booking_service (
@@ -17,13 +19,14 @@ create table booking_service (
     	booking_service_cost DOUBLE(5,2) NOT NULL
 );
 
-INSERT INTO booking_service (type_service, cost)
+
+INSERT INTO booking_service (booking_service_type, booking_service_cost)
 VALUES ('Annual Service', 200.00);
-INSERT INTO booking_service (type_service, cost)
+INSERT INTO booking_service (booking_service_type, booking_service_cost)
 VALUES (' Major Service', 500.00);
-INSERT INTO booking_service (type_service, cost)
+INSERT INTO booking_service (booking_service_type, booking_service_cost)
 VALUES ('Repair / Fault', 250.00);
-INSERT INTO booking_service (type_service, cost)
+INSERT INTO booking_service (booking_service_type, booking_service_cost)
 VALUES ('Major Repair', 700.00);
 
 
@@ -32,6 +35,7 @@ create table make (
     make_name VARCHAR(30) NOT NULL
 );
 
+INSERT INTO make (make_name) VALUES ('Other');
 INSERT INTO make (make_name) VALUES ('Audi');
 INSERT INTO make (make_name) VALUES ('BMW');
 INSERT INTO make (make_name) VALUES ('Ford');
@@ -41,6 +45,7 @@ INSERT INTO make (make_name) VALUES ('Porsche');
 INSERT INTO make (make_name) VALUES ('Renault');
 INSERT INTO make (make_name) VALUES ('Smart');
 INSERT INTO make (make_name) VALUES ('Volkswagen');
+
 
 
 create table model (
@@ -75,6 +80,11 @@ create table vehicle (
     FOREIGN KEY (booking_service) REFERENCES booking_service(booking_service_id)
 );
 
+INSERT INTO vehicle (user_id, model_id, vehicle_type, booking_service_id, vehicle_comment, vehicle_licence)
+VALUES(2, 4, "Diesel", 1, "It is making some noise", "2021-1 A2B3");
+INSERT INTO vehicle (user_id, model_id, vehicle_type, booking_service_id, vehicle_comment, vehicle_licence)
+VALUES(2, 5, "Petrol", 3, "I really need to be fixed", "2009-2 D2F3");
+select * from vehicle
 
 
 create table mechanic (

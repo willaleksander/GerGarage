@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class BookingService {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "booking_service_id")
 	private int booking_service_id;
 	private String booking_service_type;

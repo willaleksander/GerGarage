@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,12 +23,13 @@ import javax.persistence.TemporalType;
 public class Booking {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int booking_id;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date booking_date;
 	
+	@Enumerated(EnumType.STRING)
 	private Status status;
 	
 	@OneToOne(cascade = CascadeType.ALL)

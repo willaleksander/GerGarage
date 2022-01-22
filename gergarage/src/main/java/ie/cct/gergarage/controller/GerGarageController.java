@@ -139,12 +139,12 @@ public class GerGarageController {
             PreparedStatement st = (PreparedStatement) connection
                 .prepareStatement("SELECT user_username, user_password FROM user WHERE user_username=? and user_password=?");
 
-            st.setString(1, loggingUser.getUser_username());
+            st.setString(1, loggingUser.getUsername());
             st.setString(2, loggingUser.getUser_password());
             
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-            	return createJWT("finalproject", loggingUser.getUser_username(), "gergarage");
+            	return createJWT("finalproject", loggingUser.getUsername(), "gergarage");
             } else {
             	// TODO Needs a concrete exception
         		throw new RuntimeException("User not found");

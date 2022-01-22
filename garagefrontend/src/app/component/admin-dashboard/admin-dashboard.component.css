@@ -1,0 +1,11 @@
+.bg-light-custom {
+    background-color: rgb(215, 215, 215)
+}
+
+.card-max-height-150 {
+    max-height: 150px;;
+}
+
+.card-height-400 {
+    height: 400px;;
+}

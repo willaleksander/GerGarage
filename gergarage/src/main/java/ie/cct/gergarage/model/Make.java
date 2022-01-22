@@ -11,7 +11,7 @@ import javax.persistence.Table;
 public class Make {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int make_id;
 	private String make_name;
 

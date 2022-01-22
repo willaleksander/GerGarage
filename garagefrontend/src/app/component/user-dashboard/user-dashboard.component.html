@@ -1,0 +1,90 @@
+<div class="card my-3 mx-auto">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-3 mx-2 bg-light-custom card-max-height-150 mt-2">
+                <div class="row m-2">
+                    <a class="btn btn-block" (click)="setActualForm('vehicles')" [ngClass]="getActualForm()=='vehicles'?'btn-light':'btn-outline-light'">Vehicles</a>
+                </div>
+                <div class="row m-2">
+                    <a class="btn btn-block" (click)="setActualForm('register')"  [ngClass]="getActualForm()=='register'?'btn-light':'btn-outline-light'">Register</a>
+                </div>
+                <div class="row m-2">
+                    <a class="btn btn-block" (click)="setActualForm('booking')"  [ngClass]="getActualForm()=='booking'?'btn-light':'btn-outline-light'">Book Service</a>
+                </div>
+            </div>
+
+            <div class="col m-2 card-height-400" *ngIf="getActualForm()=='vehicles'">
+                <div class="row">
+                    <h2 class="col-3">Vehicles</h2>
+                    <div class="col">
+                        <form  [formGroup]="vehicleSelect">
+                            <select class="custom-select custom-select-sm mt-2" (change)="changeVehicle($event)" formControlName="vehicle">
+                                <option value="" disabled>Choose your vehicle</option>
+                                <option *ngFor="let vehicle of userVehicles" [ngValue]="vehicle">{{vehicle.vehicle_licence}}</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+                <div class="row m-2 mt-3">
+                    <form [formGroup]="vehicleForm">
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="vehicle_model">Model</label>
+                                <input type="text" formControlName="vehicle_model" class="form-control"/>
+                            </div>
+                            <div class="form-group col">
+                                <label for="vehicle_model">Make</label>
+                                <input type="text" formControlName="vehicle_make" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="vehicle_licence">Licence</label>
+                                <input type="text" formControlName="vehicle_licence" class="form-control"/>
+                            </div>
+                            <div class="form-group col">
+                                <label for="vehicle_type">Engine</label>
+                                <input type="text" formControlName="vehicle_type" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="vehicle_booking_service_type">Booking Service</label>
+                                <input type="text" formControlName="vehicle_booking_service_type" class="form-control"/>
+                            </div>
+                            <div class="form-group col">
+                                <label for="vehicle_booking_service_cost">Booking Cost</label>
+                                <input type="text" formControlName="vehicle_booking_service_cost" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="vehicle_comment">Comment</label>
+                                <input type="text" formControlName="vehicle_comment" class="form-control"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col m-2 card-height-400" *ngIf="getActualForm()=='register'">
+                <div class="row">
+                    <h2 class="">Register Vehicle</h2>
+                </div>
+                <div class="row mt-2">
+                    <h5 class="">Under construction</h5>
+                </div>
+            </div>
+
+            <div class="col m-2 card-height-400" *ngIf="getActualForm()=='booking'">
+                <div class="row">
+                    <h2 class="">Book</h2>
+                </div>
+                <div class="row mt-2">
+                    <h5 class="">Under construction</h5>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

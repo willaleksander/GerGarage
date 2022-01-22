@@ -11,7 +11,7 @@ import javax.persistence.Table;
 public class Mechanic {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int mechanic_id;
 	private String mechanic_name;
 	

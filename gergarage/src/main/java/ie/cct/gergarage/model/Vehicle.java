@@ -2,6 +2,8 @@ package ie.cct.gergarage.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,10 +16,12 @@ import javax.persistence.Table;
 public class Vehicle {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int vehicle_id;
 	private String vehicle_comment;
 	private String vehicle_licence;
+	
+	@Enumerated(EnumType.STRING)
 	private Engine_Type vehicle_type;
 	
 	@OneToOne(cascade = CascadeType.ALL)

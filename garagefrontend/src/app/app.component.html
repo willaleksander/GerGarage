@@ -1,15 +1,21 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card bg-dark my-5">
+  <div class="bg-light row">
+    <div class="col-md-12 h-100">
+      <div class="card my-4 bg-dark">
         <div class="card-body">
-          <h2 class="card-title text-center text-white py-3">{{ title }}</h2>
-          <ul class="text-center list-inline py-3">
-            <li class="list-inline-item">
-              <a routerLink="/users" class="btn btn-info">List Users</a>
+          <img src=" ../../assets/images/logo.fw.png" class="img-fluid mx-auto d-block">
+          <ul class="text-center list-inline py-3 mt-2 mb-0">
+            <li class="list-inline-item mx-1" *ngIf="!getLogged()">
+              <a routerLink="/login" class="btn text-white" [ngClass]="getRouteName()==='/login'?'btn-outline-info':'btn-info'">Login</a>
                 </li>
-            <li class="list-inline-item">
-              <a routerLink="/adduser" class="btn btn-info">Add User</a>
+            <li class="list-inline-item mx-1" *ngIf="!getLogged()">
+              <a routerLink="/adduser" class="btn text-white" [ngClass]="getRouteName()==='/adduser'?'btn-outline-info':'btn-info'">Create Account</a>
+                </li>
+            <li>
+            </li>
+            
+            <li class="list-inline-item mx-1" *ngIf="getLogged()">
+              <a routerLink="/" class="btn btn-info text-white" (click)="loggOut()">Loggout</a>
                 </li>
           </ul>
         </div>

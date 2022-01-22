@@ -1,0 +1,45 @@
+<div class="card my-3 mx-auto">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-3 mx-2 bg-light-custom card-max-height-150 mt-2">
+                <div class="row m-2">
+                    <a class="btn btn-block" (click)="setActualForm('booking')" [ngClass]="getActualForm()=='booking'?'btn-light':'btn-outline-light'">Manage bookings</a>
+                </div>
+                <div class="row m-2">
+                    <a class="btn btn-block" (click)="setActualForm('stock')"  [ngClass]="getActualForm()=='stock'?'btn-light':'btn-outline-light'">Manage Stock</a>
+                </div>
+                <div class="row m-2">
+                    <a class="btn btn-block" (click)="setActualForm('invoice')"  [ngClass]="getActualForm()=='invoice'?'btn-light':'btn-outline-light'">Invoces</a>
+                </div>
+            </div>
+
+            <div class="col m-2 card-height-400" *ngIf="getActualForm()=='booking'">
+                <div class="row">
+                    <h2 class="">Manage Booking</h2>
+                </div>
+                <div class="row mt-2">
+                    <h5 class="">Under construction</h5>
+                </div>
+            </div>
+
+            <div class="col m-2 card-height-400" *ngIf="getActualForm()=='stock'">
+                <div class="row">
+                    <h2 class="">Manage Stock</h2>
+                </div>
+                <div class="row mt-2">
+                    <h5 class="">Under construction</h5>
+                </div>
+            </div>
+
+            <div class="col m-2 card-height-400" *ngIf="getActualForm()=='invoice'">
+                <div class="row">
+                    <h2 class="">Invoice</h2>
+                </div>
+                <div class="row mt-2">
+                    <h5 class="">Under construction</h5>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

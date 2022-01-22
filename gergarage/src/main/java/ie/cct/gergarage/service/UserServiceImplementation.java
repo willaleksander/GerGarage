@@ -11,35 +11,37 @@ import ie.cct.gergarage.model.Login;
 import ie.cct.gergarage.model.User;
 import ie.cct.gergarage.repository.UserRepository;
 
+// Implementation of the interface userService
+// uses the userRepository to access the database for the user model
 @Service
 public class UserServiceImplementation implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-
+    
+    // create a user
     @Override
     public ApiResponse create(User newUser) {
-        validateSignUp(newUser);
         User user = new User();
         BeanUtils.copyProperties(newUser, user);
         userRepository.save(user);
         return new ApiResponse(200, "success", user);
     }
-
+    
+    // login to the system
     @Override
     public ApiResponse login(Login login) {
         User user = userRepository.findByUsername(login.getUsername());
         if(user == null) {
-            throw new RuntimeException("User doesn't exist.");
+            throw new RuntimeException("User does not exist");
         }
         if(!user.getUser_password().equals(login.getPassword())){
-            throw new RuntimeException("Password mismatch.");
+            throw new RuntimeException("Wrong password");
         }
-        return new ApiResponse(200, "Login success", user.getUser_type()) ;
+        // prevent someone to see user password
+        user.setUser_password(null);
+        return new ApiResponse(200, "Success login", user) ;
 
-    }
-
-    private void validateSignUp(User newUser) {
     }
 
 	@Override

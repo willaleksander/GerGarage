@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class Service {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int service_id;
 	private String service_name;
 	private double service_cost;

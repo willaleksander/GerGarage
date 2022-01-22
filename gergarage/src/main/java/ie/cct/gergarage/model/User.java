@@ -5,8 +5,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -20,7 +18,7 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int user_id;
 	private String user_name;
-	@Column(name="user_username")
+	@Column(name="user_username", unique=true)
 	private String username;
 	private String user_phone;
 
@@ -31,10 +29,10 @@ public class User {
 	
 	public User() {}
 
-	public User(String user_name, String user_username, String user_password, String user_phone, User_Type user_type) {
+	public User(String user_name, String username, String user_password, String user_phone, User_Type user_type) {
 		super();
 		this.user_name = user_name;
-		this.username = user_username;
+		this.username = username;
 		this.user_password = user_password;
 		this.user_phone = user_phone;
 		this.user_type = user_type;
@@ -56,12 +54,12 @@ public class User {
 		this.user_name = user_name;
 	}
 
-	public String getUser_username() {
+	public String getUsername() {
 		return username;
 	}
 
-	public void setUser_username(String user_username) {
-		this.username = user_username;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getUser_password() {
